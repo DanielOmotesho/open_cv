@@ -27,4 +27,18 @@ for file in os.listdir(path):
         img_resized = img.resize((mean_width,mean_height),Image.Resampling.LANCZOS)
         img_resized.save(file,"png",quality = 95)
 
+video_name="MyFirstVideo.avi"
+images=[]
+for img in os.listdir(path):
+    images.append(img)
+
+print(images)
+frame=cv2.imread(os.path.join(path, images[0]))
+height,width,layers = frame.shape
+video = cv2.VideoWriter(video_name,0,1,(width,height))
+
+for image in images: 
+    video.write(cv2.imread(os.path.join(path,image)))
+cv2.destroyAllWindows()
+video.release()
 
